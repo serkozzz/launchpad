@@ -43,8 +43,24 @@ struct LaunchpadGridModel {
         }
     }
     
+    mutating func togglePad(_ id:UUID) {
+        let (i,j) = padCoords(for: id)
+        pads[i][j].isActive.toggle()
+    }
+    
     func pad(for id: UUID) -> LaunchpadPad {
         return flattenedPads.first(where: { $0.id == id})!
+    }
+    
+    private func padCoords(for id: UUID) -> (Int, Int) {
+        for i in 0..<rows {
+            for j in 0..<columns {
+                if pads[i][j].id == id {
+                    return (i, j)
+                }
+            }
+        }
+        fatalError("padCoords: id is not on the grid")
     }
     
     var columnsChanged = PassthroughSubject<Int, Never>()

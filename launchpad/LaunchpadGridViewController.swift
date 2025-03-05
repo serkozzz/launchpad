@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LaunchpadGridViewController: UIViewController {
+class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -19,6 +19,7 @@ class LaunchpadGridViewController: UIViewController {
         super.viewDidLoad()
         collectionView.register(LaunchpadGridCell.self, forCellWithReuseIdentifier: LaunchpadGridCell.reuseID)
         collectionView.collectionViewLayout = createLayout()
+        collectionView.delegate = self 
         
         dataSource = UICollectionViewDiffableDataSource<Int, UUID>(collectionView: collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
             guard let self else { return nil }
@@ -40,6 +41,15 @@ class LaunchpadGridViewController: UIViewController {
         dataSource.apply(snapshot)
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("tooglePad")
+        let id = dataSource.itemIdentifier(for: indexPath)!
+        gridModel.togglePad(id)
+        //applySnapshot()
+        var snapshot = dataSource.snapshot()
+        snapshot.reloadItems([id])
+        dataSource.apply(snapshot)
+    }
 }
 
 
