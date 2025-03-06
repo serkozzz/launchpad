@@ -26,9 +26,9 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchpadGridCell.reuseID, for: indexPath) as! LaunchpadGridCell
             
             let pad = gridModel.pad(for: itemIdentifier)
-            let color: UIColor = pad.isActive ? .cyan : .systemGray5
+            var cfg = LaunchpadGridCellContentConfiguration(pad: pad)
+            cell.contentConfiguration = cfg
             
-            cell.configure(LaunchpadGridCell.Configuration(color: color))
             return cell
         }
         applySnapshot()

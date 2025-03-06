@@ -17,6 +17,8 @@
 		9DB15DB82D77E6C7009B5D4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DB15DAD2D77E6C7009B5D4D /* Main.storyboard */; };
 		9DB15DBB2D77E6E8009B5D4D /* LaunchpadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DBA2D77E6E4009B5D4D /* LaunchpadModel.swift */; };
 		9DB15DBD2D77E8F2009B5D4D /* LaunchpadGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DBC2D77E8AD009B5D4D /* LaunchpadGridCell.swift */; };
+		9DB15DD42D793A0F009B5D4D /* LaunchpadGridCellContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DD32D7939FD009B5D4D /* LaunchpadGridCellContentConfiguration.swift */; };
+		9DB15DD62D793A74009B5D4D /* LaunchpadGridCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DD52D793A71009B5D4D /* LaunchpadGridCellContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		9DB15DAE2D77E6C7009B5D4D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9DB15DBA2D77E6E4009B5D4D /* LaunchpadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadModel.swift; sourceTree = "<group>"; };
 		9DB15DBC2D77E8AD009B5D4D /* LaunchpadGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadGridCell.swift; sourceTree = "<group>"; };
+		9DB15DD32D7939FD009B5D4D /* LaunchpadGridCellContentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadGridCellContentConfiguration.swift; sourceTree = "<group>"; };
+		9DB15DD52D793A71009B5D4D /* LaunchpadGridCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadGridCellContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,8 @@
 				9DB15DA42D77E6C7009B5D4D /* AppDelegate.swift */,
 				9DB15DA52D77E6C7009B5D4D /* Assets.xcassets */,
 				9DB15DA62D77E6C7009B5D4D /* Info.plist */,
+				9DB15DD52D793A71009B5D4D /* LaunchpadGridCellContentView.swift */,
+				9DB15DD32D7939FD009B5D4D /* LaunchpadGridCellContentConfiguration.swift */,
 				9DB15DA82D77E6C7009B5D4D /* LaunchpadGridViewController.swift */,
 				9DB15DBC2D77E8AD009B5D4D /* LaunchpadGridCell.swift */,
 				9DB15DA92D77E6C7009B5D4D /* LaunchpadViewController.swift */,
@@ -162,11 +168,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9DB15DBD2D77E8F2009B5D4D /* LaunchpadGridCell.swift in Sources */,
+				9DB15DD42D793A0F009B5D4D /* LaunchpadGridCellContentConfiguration.swift in Sources */,
 				9DB15DB02D77E6C7009B5D4D /* AppDelegate.swift in Sources */,
 				9DB15DB12D77E6C7009B5D4D /* LaunchpadGridModel.swift in Sources */,
 				9DB15DB22D77E6C7009B5D4D /* LaunchpadGridViewController.swift in Sources */,
 				9DB15DB32D77E6C7009B5D4D /* LaunchpadViewController.swift in Sources */,
 				9DB15DBB2D77E6E8009B5D4D /* LaunchpadModel.swift in Sources */,
+				9DB15DD62D793A74009B5D4D /* LaunchpadGridCellContentView.swift in Sources */,
 				9DB15DB42D77E6C7009B5D4D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

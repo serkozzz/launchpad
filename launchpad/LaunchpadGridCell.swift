@@ -9,11 +9,5 @@ import UIKit
 
 class LaunchpadGridCell: UICollectionViewCell {
     static let reuseID = "LaunchpadGridCell"
-    struct Configuration {
-        var color: UIColor
-    }
-    
-    func configure(_ conf: Configuration) {
-        self.backgroundColor = conf.color
-    }
 }
+
