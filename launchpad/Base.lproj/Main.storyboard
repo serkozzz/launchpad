@@ -25,8 +25,34 @@
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vG7-ll-OO1">
                                 <rect key="frame" x="59" y="0.0" width="734" height="44"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B4M-7D-naM">
+                                        <rect key="frame" x="640" y="0.0" width="94" height="44"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9XI-AM-THi">
+                                                <rect key="frame" x="0.0" y="0.0" width="47" height="44"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" image="minus" catalog="system"/>
+                                                <connections>
+                                                    <action selector="minus:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Kg-uf-FJj"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4b-jZ-DYd">
+                                                <rect key="frame" x="47" y="0.0" width="47" height="44"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" image="plus" catalog="system"/>
+                                                <connections>
+                                                    <action selector="plus:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2PA-gO-p4o"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="B4M-7D-naM" secondAttribute="trailing" id="6xl-0N-qpR"/>
+                                    <constraint firstItem="B4M-7D-naM" firstAttribute="top" secondItem="vG7-ll-OO1" secondAttribute="top" id="G92-Bz-A5g"/>
+                                    <constraint firstAttribute="bottom" secondItem="B4M-7D-naM" secondAttribute="bottom" id="Mfy-Cb-G5h"/>
                                     <constraint firstAttribute="height" constant="44" id="xZk-mA-L4w"/>
                                 </constraints>
                             </view>
@@ -77,6 +103,7 @@
                                 </cells>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="CJm-XK-XtI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="cNU-fr-b63" secondAttribute="trailing" id="Q9W-1i-FWy"/>
@@ -95,6 +122,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="minus" catalog="system" width="128" height="26"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="opaqueSeparatorColor">
             <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

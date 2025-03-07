@@ -8,9 +8,9 @@
 import Foundation
 import Combine
 
-let GRID_MAX_COLUMNS = 10
+let GRID_MAX_COLUMNS = 5
 let GRID_MIN_COLUMNS = 2
-let GRID_MAX_ROWS = 10
+let GRID_MAX_ROWS = 5
 let GRID_MIN_ROWS = 2
 let GRID_DEFAULT_COLUMNS = 3
 let GRID_DEFAULT_RAWS = 3
@@ -20,7 +20,7 @@ struct LaunchpadPad {
     var id = UUID()
 }
 
-struct LaunchpadGridModel {
+class LaunchpadGridModel {
     
     private(set) var columns = GRID_DEFAULT_COLUMNS {
         didSet { columnsChanged.send(columns) }
@@ -43,7 +43,19 @@ struct LaunchpadGridModel {
         }
     }
     
-    mutating func togglePad(_ id:UUID) {
+    func increaseGrid() {
+        guard columns + 1 <= GRID_MAX_COLUMNS, rows + 1 <= GRID_MAX_ROWS else { return }
+        columns += 1
+        rows += 1
+    }
+    
+    func decreaseGrid() {
+        guard columns - 1 >= GRID_MIN_COLUMNS, rows - 1 >= GRID_MIN_ROWS else { return }
+        columns -= 1
+        rows -= 1
+    }
+    
+    func togglePad(_ id:UUID) {
         let (i,j) = padCoords(for: id)
         pads[i][j].isActive.toggle()
     }
@@ -62,6 +74,7 @@ struct LaunchpadGridModel {
         }
         fatalError("padCoords: id is not on the grid")
     }
+
     
     var columnsChanged = PassthroughSubject<Int, Never>()
     var rowsChanged = PassthroughSubject<Int, Never>()

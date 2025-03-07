@@ -6,6 +6,8 @@
 //
 import UIKit
 
+
+//ContentConfiguration абсолютно не нужен здесь, просто набиваем руку
 struct LaunchpadGridCellContentConfiguration: UIContentConfiguration {
     
     var pad: LaunchpadPad

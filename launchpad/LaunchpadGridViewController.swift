@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
 
@@ -14,6 +15,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     var dataSource: UICollectionViewDiffableDataSource<Int, UUID>!
     
     var gridModel = LaunchpadModel.shared.grid
+    private var cancellables: Set<AnyCancellable> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +28,22 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchpadGridCell.reuseID, for: indexPath) as! LaunchpadGridCell
             
             let pad = gridModel.pad(for: itemIdentifier)
-            var cfg = LaunchpadGridCellContentConfiguration(pad: pad)
+            let cfg = LaunchpadGridCellContentConfiguration(pad: pad)
             cell.contentConfiguration = cfg
             
             return cell
         }
         applySnapshot()
+        
+        gridModel.columnsChanged.sink { [weak self] _ in
+            guard let self else { return }
+            applySnapshot()
+        }.store(in: &cancellables)
+        
+        gridModel.rowsChanged.sink { [weak self] _ in
+            guard let self else { return }
+            applySnapshot()
+        }.store(in: &cancellables)
     }
 
     func applySnapshot() {
