@@ -16,6 +16,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     
     var gridModel = LaunchpadModel.shared.grid
     private var cancellables: Set<AnyCancellable> = []
+    private var padsAnimator = PadsAnimator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,13 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
             guard let self else { return }
             applySnapshot()
         }.store(in: &cancellables)
+        
+        gridModel.padChanged.sink { [weak self] id in
+            guard let self else { return }
+            var snapshot = dataSource.snapshot()
+            snapshot.reloadItems([id])
+            dataSource.apply(snapshot, animatingDifferences: false)
+        }.store(in: &cancellables)
     }
 
     func applySnapshot() {
@@ -56,11 +64,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("tooglePad")
         let id = dataSource.itemIdentifier(for: indexPath)!
-        gridModel.togglePad(id)
-        //applySnapshot()
-        var snapshot = dataSource.snapshot()
-        snapshot.reloadItems([id])
-        dataSource.apply(snapshot)
+        padsAnimator.blink(padID: id)
     }
 }
 
@@ -84,6 +88,5 @@ extension LaunchpadGridViewController {
             return section
         }
     }
-    
 }
 

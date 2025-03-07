@@ -58,6 +58,7 @@ class LaunchpadGridModel {
     func togglePad(_ id:UUID) {
         let (i,j) = padCoords(for: id)
         pads[i][j].isActive.toggle()
+        padChanged.send(pads[i][j].id)
     }
     
     func pad(for id: UUID) -> LaunchpadPad {
@@ -78,6 +79,7 @@ class LaunchpadGridModel {
     
     var columnsChanged = PassthroughSubject<Int, Never>()
     var rowsChanged = PassthroughSubject<Int, Never>()
+    var padChanged = PassthroughSubject<UUID, Never>()
 }
 
 
