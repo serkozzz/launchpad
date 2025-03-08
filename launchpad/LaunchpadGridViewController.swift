@@ -17,6 +17,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     var gridModel = LaunchpadModel.shared.grid
     private var cancellables: Set<AnyCancellable> = []
     private var padsAnimator = PadsAnimator()
+    private var soundsPlayer = SoundsPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +66,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
         print("tooglePad")
         let id = dataSource.itemIdentifier(for: indexPath)!
         padsAnimator.blink(padID: id)
+        soundsPlayer.play(instrumentNumber: 0)
     }
 }
 
