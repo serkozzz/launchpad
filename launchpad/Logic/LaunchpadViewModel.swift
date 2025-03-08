@@ -8,8 +8,13 @@
 import UIKit
 import Combine
 
-class LaunchpadManager {
-    var onUpdate: (() -> Void)?
+class LaunchpadViewModel {
+    enum LaunchpadChange {
+        case collectionUpdated
+        case padUpdated 
+    }
+    
+    var onUpdate: ((LaunchpadChange) -> Void)?
     
     private(set) var snapshot = NSDiffableDataSourceSnapshot<Int, UUID>()
     private var gridModel = LaunchpadModel.shared.grid
@@ -21,20 +26,20 @@ class LaunchpadManager {
         gridModel.columnsChanged.sink { [weak self] _ in
             guard let self else { return }
             recreateSnapshot()
-            onUpdate?()
+            onUpdate?(.collectionUpdated)
         }.store(in: &cancellables)
         
         gridModel.rowsChanged.sink { [weak self] _ in
             guard let self else { return }
             recreateSnapshot()
-            onUpdate?()
+            onUpdate?(.collectionUpdated)
         }.store(in: &cancellables)
         
         gridModel.padChanged.sink { [weak self] id in
             guard let self else { return }
             recreateSnapshot()
             snapshot.reloadItems([id])
-            onUpdate?()
+            onUpdate?(.padUpdated)
         }.store(in: &cancellables)
     }
     
