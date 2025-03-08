@@ -15,6 +15,7 @@
 		9D0598B32D7C00510022140D /* ContentLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0598B22D7C00510022140D /* ContentLoader.swift */; };
 		9D0598B52D7C026A0022140D /* InstrumentsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0598B42D7C02660022140D /* InstrumentsMap.swift */; };
 		9D6986A62D7C051C00F370BE /* AudioStorage in Resources */ = {isa = PBXBuildFile; fileRef = 9D0598C12D7C04A60022140D /* AudioStorage */; };
+		9D6986A82D7CE1F600F370BE /* LaunchpadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6986A72D7CE1EE00F370BE /* LaunchpadManager.swift */; };
 		9DB15DB02D77E6C7009B5D4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DA42D77E6C7009B5D4D /* AppDelegate.swift */; };
 		9DB15DB12D77E6C7009B5D4D /* LaunchpadGridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DA72D77E6C7009B5D4D /* LaunchpadGridModel.swift */; };
 		9DB15DB22D77E6C7009B5D4D /* LaunchpadGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DA82D77E6C7009B5D4D /* LaunchpadGridViewController.swift */; };
@@ -38,6 +39,7 @@
 		9D0598B22D7C00510022140D /* ContentLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLoader.swift; sourceTree = "<group>"; };
 		9D0598B42D7C02660022140D /* InstrumentsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentsMap.swift; sourceTree = "<group>"; };
 		9D0598C12D7C04A60022140D /* AudioStorage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AudioStorage; sourceTree = "<group>"; };
+		9D6986A72D7CE1EE00F370BE /* LaunchpadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadManager.swift; sourceTree = "<group>"; };
 		9DB15D872D77DC43009B5D4D /* launchpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = launchpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB15DA42D77E6C7009B5D4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DB15DA52D77E6C7009B5D4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		9D0598AC2D7BFECC0022140D /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				9D6986A72D7CE1EE00F370BE /* LaunchpadManager.swift */,
 				9D0598B22D7C00510022140D /* ContentLoader.swift */,
 				9D0598A82D7BFEB70022140D /* SoundsPlayer.swift */,
 				9D0598A92D7BFEB70022140D /* AudioSampler.swift */,
@@ -218,6 +221,7 @@
 				9DB15DB22D77E6C7009B5D4D /* LaunchpadGridViewController.swift in Sources */,
 				9D0598AE2D7BFF2D0022140D /* InstrumentModel.swift in Sources */,
 				9DB15DB32D77E6C7009B5D4D /* LaunchpadViewController.swift in Sources */,
+				9D6986A82D7CE1F600F370BE /* LaunchpadManager.swift in Sources */,
 				9DB15DBB2D77E6E8009B5D4D /* LaunchpadModel.swift in Sources */,
 				9DB15DD62D793A74009B5D4D /* LaunchpadGridCellContentView.swift in Sources */,
 				9D0598AA2D7BFEB70022140D /* SoundsPlayer.swift in Sources */,

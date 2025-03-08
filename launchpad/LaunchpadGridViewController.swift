@@ -18,6 +18,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     private var cancellables: Set<AnyCancellable> = []
     private var padsAnimator = PadsAnimator()
     private var soundsPlayer = SoundsPlayer()
+    private var launchpadManager = LaunchpadManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,30 +37,14 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
             return cell
         }
         applySnapshot()
-        
-        gridModel.columnsChanged.sink { [weak self] _ in
+        launchpadManager.onUpdate = { [weak self] in
             guard let self else { return }
             applySnapshot()
-        }.store(in: &cancellables)
-        
-        gridModel.rowsChanged.sink { [weak self] _ in
-            guard let self else { return }
-            applySnapshot()
-        }.store(in: &cancellables)
-        
-        gridModel.padChanged.sink { [weak self] id in
-            guard let self else { return }
-            var snapshot = dataSource.snapshot()
-            snapshot.reloadItems([id])
-            dataSource.apply(snapshot, animatingDifferences: false)
-        }.store(in: &cancellables)
+        }
     }
 
     func applySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, UUID>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(gridModel.flattenedPads.map { $0.id })
-        dataSource.apply(snapshot)
+        dataSource.apply(launchpadManager.snapshot)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
