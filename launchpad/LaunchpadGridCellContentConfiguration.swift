@@ -11,6 +11,7 @@ import UIKit
 struct LaunchpadGridCellContentConfiguration: UIContentConfiguration {
     
     var pad: LaunchpadPad
+    var editMode: Bool
     
     func makeContentView() -> any UIView & UIContentView {
         return LaunchpadGridCellContentView(self)

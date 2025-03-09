@@ -27,10 +27,26 @@
                                 <rect key="frame" x="59" y="0.0" width="734" height="44"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B4M-7D-naM">
-                                        <rect key="frame" x="640" y="0.0" width="94" height="44"/>
+                                        <rect key="frame" x="586.66666666666663" y="0.0" width="147.33333333333337" height="44"/>
                                         <subviews>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFE-b9-FIo">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="44"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
+                                                <connections>
+                                                    <action selector="cancel:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZLQ-yN-Emg"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6IE-U2-nBd">
+                                                <rect key="frame" x="0.0" y="0.0" width="53.333333333333336" height="44"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Edit"/>
+                                                <connections>
+                                                    <action selector="edit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c9G-6y-h2C"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9XI-AM-THi">
-                                                <rect key="frame" x="0.0" y="0.0" width="47" height="44"/>
+                                                <rect key="frame" x="53.333333333333371" y="0.0" width="47" height="44"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="gray" image="minus" catalog="system"/>
                                                 <connections>
@@ -38,7 +54,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4b-jZ-DYd">
-                                                <rect key="frame" x="47" y="0.0" width="47" height="44"/>
+                                                <rect key="frame" x="100.33333333333337" y="0.0" width="47" height="44"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="gray" image="plus" catalog="system"/>
                                                 <connections>
@@ -69,6 +85,10 @@
                             <constraint firstItem="vG7-ll-OO1" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="cbY-Qt-C8i"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cancelButton" destination="gFE-b9-FIo" id="59X-Lt-hNv"/>
+                        <outlet property="editButton" destination="6IE-U2-nBd" id="p9Y-7x-s7u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -125,7 +145,7 @@
         <image name="minus" catalog="system" width="128" height="26"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -27,7 +27,12 @@ class LaunchpadGridCellContentView : UIView, UIContentView {
     
     func update() {
         let pad = cfg.pad
-        backgroundColor = pad.isActive ? .cyan : .systemGray5
+        if (cfg.editMode) {
+            backgroundColor = .systemGray3
+        }
+        else {
+            backgroundColor = pad.isActive ? .cyan : .systemGray5
+        }
     }
     
     private var cfg: LaunchpadGridCellContentConfiguration {

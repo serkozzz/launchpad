@@ -37,7 +37,7 @@ class LaunchpadGridModel {
         get {
             var result = [LaunchpadPad]()
             for i in 0..<rows {
-                var start = i * GRID_MAX_COLUMNS
+                let start = i * GRID_MAX_COLUMNS
                 result += allPads[start..<(start + columns)]
             }
             return result
@@ -84,17 +84,17 @@ class LaunchpadGridModel {
     private func allPadsIndex(for id: UUID) -> Int {
         return allPads.firstIndex(where: {$0.id == id})!
     }
-    
-    private func padCoords(for id: UUID) -> (Int, Int) {
-        for i in 0..<rows {
-            for j in 0..<columns {
-                if self[i, j].id == id {
-                    return (i, j)
-                }
-            }
-        }
-        fatalError("padCoords: id is not on the grid")
-    }
+//    
+//    private func padCoords(for id: UUID) -> (Int, Int) {
+//        for i in 0..<rows {
+//            for j in 0..<columns {
+//                if self[i, j].id == id {
+//                    return (i, j)
+//                }
+//            }
+//        }
+//        fatalError("padCoords: id is not on the grid")
+//    }
 
     
     var columnsChanged = PassthroughSubject<Int, Never>()

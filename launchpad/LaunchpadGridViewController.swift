@@ -15,10 +15,16 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     var dataSource: UICollectionViewDiffableDataSource<Int, UUID>!
     
     var gridModel = LaunchpadModel.shared.grid
+    var editMode: Bool = false {
+        didSet {
+            reloadAllItems()
+        }
+    }
+    
     private var cancellables: Set<AnyCancellable> = []
     private var padsAnimator = PadsAnimator()
     private var soundsPlayer = SoundsPlayer()
-    private var launchpadManager = LaunchpadViewModel()
+    private var launchpadViewModel = LaunchpadViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +37,13 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchpadGridCell.reuseID, for: indexPath) as! LaunchpadGridCell
             
             let pad = gridModel.pad(for: itemIdentifier)
-            let cfg = LaunchpadGridCellContentConfiguration(pad: pad)
+            let cfg = LaunchpadGridCellContentConfiguration(pad: pad, editMode: editMode)
             cell.contentConfiguration = cfg
             
             return cell
         }
         applySnapshot()
-        launchpadManager.onUpdate = { [weak self] changeType in
+        launchpadViewModel.onUpdate = { [weak self] changeType in
             guard let self else { return }
             let animating = changeType == .collectionUpdated
             applySnapshot(animating: animating)
@@ -45,7 +51,13 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     }
 
     func applySnapshot(animating: Bool = true) {
-        dataSource.apply(launchpadManager.snapshot, animatingDifferences: animating)
+        dataSource.apply(launchpadViewModel.snapshot, animatingDifferences: animating)
+    }
+    
+    func reloadAllItems() {
+        var snapshot = launchpadViewModel.snapshot
+        snapshot.reloadItems(snapshot.itemIdentifiers)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
