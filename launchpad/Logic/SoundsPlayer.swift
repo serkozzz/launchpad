@@ -7,24 +7,24 @@
 
 import Foundation
 import AVFAudio
+import CoreData
 
 class SoundsPlayer {
     
     private let engine = AVAudioEngine()
-    private var samplers: [AudioSampler] = []
+    private var samplers: [NSManagedObjectID: AudioSampler] = [:]
     
     init() {
         configureAudioSession()
-        
-        LaunchpadModel.shared.instrumetnsMap.instruments.forEach {
-            let wavURL = urlForAudio($0.audioFileName)
-            samplers.append(AudioSampler(engine: engine, wavUrl: wavURL))
+        LaunchpadModel.shared.instrumetns.forEach {
+            let wavURL = urlForAudio($0.audioFileName!)
+            samplers[$0.objectID] = AudioSampler(engine: engine, wavUrl: wavURL)
         }
         startAudioEngine()
     }
     
-    func play(instrumentNumber: Int) {
-        samplers[instrumentNumber].play()
+    func play(instument: InstrumentDB) {
+        samplers[instument.objectID]!.play()
     }
     
     private func urlForAudio(_ fileName: String) -> URL {

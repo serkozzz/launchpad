@@ -15,7 +15,7 @@ class LaunchpadViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        prepareAudioStorage()
+
         gridVC = children.first(where: {$0 is LaunchpadGridViewController}) as? LaunchpadGridViewController
         
     }
@@ -36,14 +36,5 @@ class LaunchpadViewController: UIViewController {
         gridVC.editMode = false
         cancelButton.isHidden = true
         editButton.isHidden = false
-    }
-    
-    private func prepareAudioStorage() {
-        do {
-            let url = Bundle.main.url(forResource: Globals.AUDIO_STORAGE_ROOT, withExtension: nil)!
-            try ContentLoader.shared.loadAudioStorage(dirURL: url)
-        }
-        catch { print("ContentLoader.\(#function) Ошибка загрузки audioStorage: \(error)") }
-    }
-    
+    }    
 }

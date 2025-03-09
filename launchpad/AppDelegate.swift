@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        prepareAudioStorage()
         DBGenerator().generateIfNeeded()
         return true
     }
@@ -38,6 +39,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             return .all
         }
+    }
+    
+    private func prepareAudioStorage() {
+        do {
+            let url = Bundle.main.url(forResource: Globals.AUDIO_STORAGE_ROOT, withExtension: nil)!
+            try ContentLoader.shared.loadAudioStorage(dirURL: url)
+        }
+        catch { print("ContentLoader.\(#function) Ошибка загрузки audioStorage: \(error)") }
     }
 }
 

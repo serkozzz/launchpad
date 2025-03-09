@@ -64,13 +64,16 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("tooglePad")
         let id = dataSource.itemIdentifier(for: indexPath)!
+        let pad = gridModel.pad(for: id)
         
         if (editMode) {
             
         }
         else {
             padsAnimator.blink(padID: id)
-            soundsPlayer.play(instrumentNumber: 0)
+            if let instrument = pad.instrument {
+                soundsPlayer.play(instument: instrument)
+            }
         }
     }
 }

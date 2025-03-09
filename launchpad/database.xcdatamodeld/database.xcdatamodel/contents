@@ -8,6 +8,6 @@
     </entity>
     <entity name="LaunchpadPadDB" representedClassName="LaunchpadPadDB" syncable="YES" codeGenerationType="category">
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InstrumentDB"/>
+        <relationship name="instrument" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InstrumentDB"/>
     </entity>
 </model>

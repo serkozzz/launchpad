@@ -12,10 +12,12 @@ struct LaunchpadPad {
     var isActive: Bool = false
     var number: Int = 0
     var id: NSManagedObjectID
+    var instrument: InstrumentDB?
     
     init (_ padDB: LaunchpadPadDB) {
         isActive = padDB.isActive
         number = Int(padDB.order)
         id = padDB.objectID
+        instrument = padDB.instrument
     }
 }

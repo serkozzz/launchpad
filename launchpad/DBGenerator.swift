@@ -35,10 +35,10 @@ class DBGenerator {
             pad.order = Int16($0)
             pads.append(pad)
         }
-        pads.first(where: { $0.order == 0})!.relationship = hatOpened
-        pads.first(where: { $0.order == 1})!.relationship = snare
-        pads.first(where: { $0.order == GRID_MAX_COLUMNS})!.relationship = hat
-        pads.first(where: { $0.order == GRID_MAX_COLUMNS + 1})!.relationship = kick
+        pads.first(where: { $0.order == 0})!.instrument = hatOpened
+        pads.first(where: { $0.order == 1})!.instrument = snare
+        pads.first(where: { $0.order == GRID_MAX_COLUMNS})!.instrument = hat
+        pads.first(where: { $0.order == GRID_MAX_COLUMNS + 1})!.instrument = kick
 
         do {
             try context.save()
