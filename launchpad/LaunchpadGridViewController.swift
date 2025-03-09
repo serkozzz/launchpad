@@ -38,6 +38,8 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchpadGridCell.reuseID, for: indexPath) as! LaunchpadGridCell
             
             let pad = gridModel.pad(for: itemIdentifier)
+            cell.pad = pad
+            cell.delegate = self
             let cfg = LaunchpadGridCellContentConfiguration(pad: pad, editMode: editMode)
             cell.contentConfiguration = cfg
             
@@ -61,9 +63,15 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
         dataSource.apply(snapshot, animatingDifferences: true)
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+//    }
+}
+
+extension LaunchpadGridViewController : LaunchpadGridCellDelegate {
+    func launchpadGridCellDidTap(_ cell: LaunchpadGridCell) {
+        
         print("tooglePad")
-        let id = dataSource.itemIdentifier(for: indexPath)!
+        let id = cell.pad.id
         let pad = gridModel.pad(for: id)
         
         if (editMode) {
@@ -76,8 +84,9 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
             }
         }
     }
+    
+    
 }
-
 
 extension LaunchpadGridViewController {
     func createLayout() -> UICollectionViewCompositionalLayout {
