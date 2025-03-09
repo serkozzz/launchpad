@@ -46,7 +46,7 @@ class LaunchpadViewModel {
     func recreateSnapshot() {
         snapshot = NSDiffableDataSourceSnapshot<Int, UUID>()
         snapshot.appendSections([0])
-        snapshot.appendItems(gridModel.flattenedPads.map { $0.id })
+        snapshot.appendItems(gridModel.visiblePads.map { $0.id })
 
     }
     

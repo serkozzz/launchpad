@@ -29,18 +29,34 @@ class LaunchpadGridModel {
         didSet { rowsChanged.send(rows) }
     }
 
-    private(set) var pads = [[LaunchpadPad]]()
-    var flattenedPads: [LaunchpadPad] {
-        let allRows = pads.flatMap { Array($0.prefix(columns)) }
-        return Array(allRows.prefix(rows * columns))
+    
+    
+    private var allPads = [LaunchpadPad]()
+    
+    var visiblePads: [LaunchpadPad] {
+        get {
+            var result = [LaunchpadPad]()
+            for i in 0..<rows {
+                var start = i * GRID_MAX_COLUMNS
+                result += allPads[start..<(start + columns)]
+            }
+            return result
+        }
+    }
+    
+    private(set) subscript(row: Int, column: Int) -> LaunchpadPad {
+        get {
+            let index = row * GRID_MAX_COLUMNS + column
+            return allPads[index]
+        }
+        set {
+            let index = row * GRID_MAX_COLUMNS + column
+            allPads[index] = newValue
+        }
     }
     
     init () {
-        pads = (0..<GRID_MAX_ROWS).map { _ in
-            (0..<GRID_MAX_COLUMNS).map { _ in
-                LaunchpadPad()
-            }
-        }
+        allPads = (0..<GRID_MAX_ROWS * GRID_MAX_COLUMNS).map { _ in LaunchpadPad()  }
     }
     
     func increaseGrid() {
@@ -55,20 +71,24 @@ class LaunchpadGridModel {
         rows -= 1
     }
     
-    func togglePad(_ id:UUID) {
-        let (i,j) = padCoords(for: id)
-        pads[i][j].isActive.toggle()
-        padChanged.send(pads[i][j].id)
+    func togglePad(_ id: UUID) {
+        let index = allPadsIndex(for: id)
+        allPads[index].isActive.toggle()
+        padChanged.send(id)
     }
     
     func pad(for id: UUID) -> LaunchpadPad {
-        return flattenedPads.first(where: { $0.id == id})!
+        return allPads.first(where: { $0.id == id})!
+    }
+    
+    private func allPadsIndex(for id: UUID) -> Int {
+        return allPads.firstIndex(where: {$0.id == id})!
     }
     
     private func padCoords(for id: UUID) -> (Int, Int) {
         for i in 0..<rows {
             for j in 0..<columns {
-                if pads[i][j].id == id {
+                if self[i, j].id == id {
                     return (i, j)
                 }
             }
