@@ -17,8 +17,8 @@ class SoundsPlayer {
     init() {
         configureAudioSession()
         LaunchpadModel.shared.instrumetns.forEach {
-            let wavURL = urlForAudio($0.audioFileName!)
-            samplers[$0.objectID] = AudioSampler(engine: engine, wavUrl: wavURL)
+            let wavURL = urlForAudio($0.audioFileName)
+            samplers[$0.id] = AudioSampler(engine: engine, wavUrl: wavURL)
         }
         startAudioEngine()
     }

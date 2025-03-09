@@ -9,9 +9,12 @@ import CoreData
 
 class LaunchpadModel {
     static private(set) var shared = LaunchpadModel()
-    var grid = LaunchpadGridModel()
-    var instrumetns: [InstrumentDB] {
-        return fetchInstruments()
+    
+    private(set) var grid = LaunchpadGridModel()
+    private lazy var instrumentsDB: [InstrumentDB] = fetchInstruments()
+    
+    var instrumetns: [Instrument] {
+        return instrumentsDB.map { Instrument($0) }
     }
 
     private func fetchInstruments() -> [InstrumentDB] {
