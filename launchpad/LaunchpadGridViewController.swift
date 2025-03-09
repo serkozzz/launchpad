@@ -31,7 +31,9 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
         super.viewDidLoad()
         collectionView.register(LaunchpadGridCell.self, forCellWithReuseIdentifier: LaunchpadGridCell.reuseID)
         collectionView.collectionViewLayout = createLayout()
-        collectionView.delegate = self 
+        collectionView.delegate = self
+        collectionView.delaysContentTouches = false
+        collectionView.isScrollEnabled = false
         
         dataSource = UICollectionViewDiffableDataSource<Int, NSManagedObjectID>(collectionView: collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
             guard let self else { return nil }
