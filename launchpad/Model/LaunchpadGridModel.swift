@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import CoreData
 
 let GRID_MAX_COLUMNS = 5
 let GRID_MIN_COLUMNS = 2
@@ -15,10 +16,7 @@ let GRID_MIN_ROWS = 2
 let GRID_DEFAULT_COLUMNS = 3
 let GRID_DEFAULT_RAWS = 3
 
-struct LaunchpadPad {
-    var isActive: Bool = false
-    var id = UUID()
-}
+
 
 class LaunchpadGridModel {
     
@@ -31,32 +29,39 @@ class LaunchpadGridModel {
 
     
     
-    private var allPads = [LaunchpadPad]()
+    private var allPads = [LaunchpadPadDB]()
     
     var visiblePads: [LaunchpadPad] {
         get {
             var result = [LaunchpadPad]()
             for i in 0..<rows {
                 let start = i * GRID_MAX_COLUMNS
-                result += allPads[start..<(start + columns)]
+                result += allPads[start..<(start + columns)].map { LaunchpadPad($0)}
             }
             return result
         }
     }
     
-    private(set) subscript(row: Int, column: Int) -> LaunchpadPad {
+    subscript(row: Int, column: Int) -> LaunchpadPad {
         get {
             let index = row * GRID_MAX_COLUMNS + column
-            return allPads[index]
+            return LaunchpadPad(allPads[index])
         }
-        set {
-            let index = row * GRID_MAX_COLUMNS + column
-            allPads[index] = newValue
-        }
+//        set {
+//            let index = row * GRID_MAX_COLUMNS + column
+//        }
     }
     
+    private var counter = 0
     init () {
-        allPads = (0..<GRID_MAX_ROWS * GRID_MAX_COLUMNS).map { _ in LaunchpadPad()  }
+        allPads = fetchPads()
+    }
+    
+    private func fetchPads() -> [LaunchpadPadDB] {
+        let fetchRequest: NSFetchRequest<LaunchpadPadDB> = LaunchpadPadDB.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "order", ascending: true)]
+        let pads = try! CoreDataStack.shared.managedContext.fetch(fetchRequest)
+        return pads
     }
     
     func increaseGrid() {
@@ -71,18 +76,19 @@ class LaunchpadGridModel {
         rows -= 1
     }
     
-    func togglePad(_ id: UUID) {
+    func togglePad(_ id: NSManagedObjectID) {
         let index = allPadsIndex(for: id)
         allPads[index].isActive.toggle()
         padChanged.send(id)
     }
     
-    func pad(for id: UUID) -> LaunchpadPad {
-        return allPads.first(where: { $0.id == id})!
+    func pad(for id: NSManagedObjectID) -> LaunchpadPad {
+        var padDB = allPads.first(where: { $0.objectID == id})!
+        return LaunchpadPad(padDB)
     }
     
-    private func allPadsIndex(for id: UUID) -> Int {
-        return allPads.firstIndex(where: {$0.id == id})!
+    private func allPadsIndex(for id: NSManagedObjectID) -> Int {
+        return allPads.firstIndex(where: {$0.objectID == id})!
     }
 //    
 //    private func padCoords(for id: UUID) -> (Int, Int) {
@@ -99,7 +105,7 @@ class LaunchpadGridModel {
     
     var columnsChanged = PassthroughSubject<Int, Never>()
     var rowsChanged = PassthroughSubject<Int, Never>()
-    var padChanged = PassthroughSubject<UUID, Never>()
+    var padChanged = PassthroughSubject<NSManagedObjectID, Never>()
 }
 
 

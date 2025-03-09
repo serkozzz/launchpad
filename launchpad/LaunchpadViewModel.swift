@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import CoreData
 
 class LaunchpadViewModel {
     enum LaunchpadChange {
@@ -16,7 +17,7 @@ class LaunchpadViewModel {
     
     var onUpdate: ((LaunchpadChange) -> Void)?
     
-    private(set) var snapshot = NSDiffableDataSourceSnapshot<Int, UUID>()
+    private(set) var snapshot = NSDiffableDataSourceSnapshot<Int, NSManagedObjectID>()
     private var gridModel = LaunchpadModel.shared.grid
     private var cancellables: Set<AnyCancellable> = []
     
@@ -44,7 +45,7 @@ class LaunchpadViewModel {
     }
     
     func recreateSnapshot() {
-        snapshot = NSDiffableDataSourceSnapshot<Int, UUID>()
+        snapshot = NSDiffableDataSourceSnapshot<Int, NSManagedObjectID>()
         snapshot.appendSections([0])
         snapshot.appendItems(gridModel.visiblePads.map { $0.id })
 

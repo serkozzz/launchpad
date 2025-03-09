@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9D03903A2D7D34D9001E3DDB /* InstrumentDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0390362D7D34D9001E3DDB /* InstrumentDB+CoreDataClass.swift */; };
+		9D03903C2D7D34D9001E3DDB /* LaunchpadPadDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0390382D7D34D9001E3DDB /* LaunchpadPadDB+CoreDataClass.swift */; };
 		9D0598A72D7AA4990022140D /* PadsAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0598A62D7AA4900022140D /* PadsAnimator.swift */; };
 		9D0598AA2D7BFEB70022140D /* SoundsPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0598A82D7BFEB70022140D /* SoundsPlayer.swift */; };
 		9D0598AB2D7BFEB70022140D /* AudioSampler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0598A92D7BFEB70022140D /* AudioSampler.swift */; };
@@ -16,6 +18,9 @@
 		9D0598B52D7C026A0022140D /* InstrumentsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0598B42D7C02660022140D /* InstrumentsMap.swift */; };
 		9D6986A62D7C051C00F370BE /* AudioStorage in Resources */ = {isa = PBXBuildFile; fileRef = 9D0598C12D7C04A60022140D /* AudioStorage */; };
 		9D6986A82D7CE1F600F370BE /* LaunchpadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6986A72D7CE1EE00F370BE /* LaunchpadViewModel.swift */; };
+		9D6986AA2D7D1AFC00F370BE /* LaunchpadPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6986A92D7D1AF800F370BE /* LaunchpadPad.swift */; };
+		9D6986AD2D7D205400F370BE /* database.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9D6986AB2D7D205400F370BE /* database.xcdatamodeld */; };
+		9D6986AF2D7D270D00F370BE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D6986AE2D7D270800F370BE /* CoreDataStack.swift */; };
 		9DB15DB02D77E6C7009B5D4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DA42D77E6C7009B5D4D /* AppDelegate.swift */; };
 		9DB15DB12D77E6C7009B5D4D /* LaunchpadGridModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DA72D77E6C7009B5D4D /* LaunchpadGridModel.swift */; };
 		9DB15DB22D77E6C7009B5D4D /* LaunchpadGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DA82D77E6C7009B5D4D /* LaunchpadGridViewController.swift */; };
@@ -28,9 +33,12 @@
 		9DB15DBD2D77E8F2009B5D4D /* LaunchpadGridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DBC2D77E8AD009B5D4D /* LaunchpadGridCell.swift */; };
 		9DB15DD42D793A0F009B5D4D /* LaunchpadGridCellContentConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DD32D7939FD009B5D4D /* LaunchpadGridCellContentConfiguration.swift */; };
 		9DB15DD62D793A74009B5D4D /* LaunchpadGridCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DD52D793A71009B5D4D /* LaunchpadGridCellContentView.swift */; };
+		9DD33E232D7D287500DAF3C4 /* DBGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD33E222D7D287100DAF3C4 /* DBGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9D0390362D7D34D9001E3DDB /* InstrumentDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InstrumentDB+CoreDataClass.swift"; sourceTree = "<group>"; };
+		9D0390382D7D34D9001E3DDB /* LaunchpadPadDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LaunchpadPadDB+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9D0598A62D7AA4900022140D /* PadsAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadsAnimator.swift; sourceTree = "<group>"; };
 		9D0598A82D7BFEB70022140D /* SoundsPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsPlayer.swift; sourceTree = "<group>"; };
 		9D0598A92D7BFEB70022140D /* AudioSampler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioSampler.swift; sourceTree = "<group>"; };
@@ -40,6 +48,9 @@
 		9D0598B42D7C02660022140D /* InstrumentsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentsMap.swift; sourceTree = "<group>"; };
 		9D0598C12D7C04A60022140D /* AudioStorage */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AudioStorage; sourceTree = "<group>"; };
 		9D6986A72D7CE1EE00F370BE /* LaunchpadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadViewModel.swift; sourceTree = "<group>"; };
+		9D6986A92D7D1AF800F370BE /* LaunchpadPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadPad.swift; sourceTree = "<group>"; };
+		9D6986AC2D7D205400F370BE /* database.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = database.xcdatamodel; sourceTree = "<group>"; };
+		9D6986AE2D7D270800F370BE /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9DB15D872D77DC43009B5D4D /* launchpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = launchpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DB15DA42D77E6C7009B5D4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9DB15DA52D77E6C7009B5D4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,6 +65,7 @@
 		9DB15DBC2D77E8AD009B5D4D /* LaunchpadGridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadGridCell.swift; sourceTree = "<group>"; };
 		9DB15DD32D7939FD009B5D4D /* LaunchpadGridCellContentConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadGridCellContentConfiguration.swift; sourceTree = "<group>"; };
 		9DB15DD52D793A71009B5D4D /* LaunchpadGridCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadGridCellContentView.swift; sourceTree = "<group>"; };
+		9DD33E222D7D287100DAF3C4 /* DBGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +101,8 @@
 		9DB15D7E2D77DC43009B5D4D = {
 			isa = PBXGroup;
 			children = (
+				9D0390362D7D34D9001E3DDB /* InstrumentDB+CoreDataClass.swift */,
+				9D0390382D7D34D9001E3DDB /* LaunchpadPadDB+CoreDataClass.swift */,
 				9DB15DAF2D77E6C7009B5D4D /* launchpad */,
 				9DB15D882D77DC43009B5D4D /* Products */,
 			);
@@ -105,6 +119,9 @@
 		9DB15DAF2D77E6C7009B5D4D /* launchpad */ = {
 			isa = PBXGroup;
 			children = (
+				9D6986AE2D7D270800F370BE /* CoreDataStack.swift */,
+				9DD33E222D7D287100DAF3C4 /* DBGenerator.swift */,
+				9D6986AB2D7D205400F370BE /* database.xcdatamodeld */,
 				9D0598C12D7C04A60022140D /* AudioStorage */,
 				9D0598B02D7BFF990022140D /* utils */,
 				9D0598AC2D7BFECC0022140D /* Logic */,
@@ -128,6 +145,7 @@
 		9DB15DB92D77E6CE009B5D4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9D6986A92D7D1AF800F370BE /* LaunchpadPad.swift */,
 				9D0598B42D7C02660022140D /* InstrumentsMap.swift */,
 				9DB15DBA2D77E6E4009B5D4D /* LaunchpadModel.swift */,
 				9DB15DA72D77E6C7009B5D4D /* LaunchpadGridModel.swift */,
@@ -219,12 +237,18 @@
 				9DB15DB12D77E6C7009B5D4D /* LaunchpadGridModel.swift in Sources */,
 				9D0598A72D7AA4990022140D /* PadsAnimator.swift in Sources */,
 				9DB15DB22D77E6C7009B5D4D /* LaunchpadGridViewController.swift in Sources */,
+				9D6986AA2D7D1AFC00F370BE /* LaunchpadPad.swift in Sources */,
 				9D0598AE2D7BFF2D0022140D /* InstrumentModel.swift in Sources */,
+				9D03903A2D7D34D9001E3DDB /* InstrumentDB+CoreDataClass.swift in Sources */,
+				9D03903C2D7D34D9001E3DDB /* LaunchpadPadDB+CoreDataClass.swift in Sources */,
 				9DB15DB32D77E6C7009B5D4D /* LaunchpadViewController.swift in Sources */,
 				9D6986A82D7CE1F600F370BE /* LaunchpadViewModel.swift in Sources */,
+				9DD33E232D7D287500DAF3C4 /* DBGenerator.swift in Sources */,
 				9DB15DBB2D77E6E8009B5D4D /* LaunchpadModel.swift in Sources */,
 				9DB15DD62D793A74009B5D4D /* LaunchpadGridCellContentView.swift in Sources */,
 				9D0598AA2D7BFEB70022140D /* SoundsPlayer.swift in Sources */,
+				9D6986AF2D7D270D00F370BE /* CoreDataStack.swift in Sources */,
+				9D6986AD2D7D205400F370BE /* database.xcdatamodeld in Sources */,
 				9D0598AB2D7BFEB70022140D /* AudioSampler.swift in Sources */,
 				9D0598B12D7BFF990022140D /* Globals.swift in Sources */,
 				9DB15DB42D77E6C7009B5D4D /* SceneDelegate.swift in Sources */,
@@ -450,6 +474,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9D6986AB2D7D205400F370BE /* database.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9D6986AC2D7D205400F370BE /* database.xcdatamodel */,
+			);
+			currentVersion = 9D6986AC2D7D205400F370BE /* database.xcdatamodel */;
+			path = database.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9DB15D7F2D77DC43009B5D4D /* Project object */;
 }

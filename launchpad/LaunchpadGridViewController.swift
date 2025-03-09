@@ -7,12 +7,13 @@
 
 import UIKit
 import Combine
+import CoreData
 
 class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var dataSource: UICollectionViewDiffableDataSource<Int, UUID>!
+    var dataSource: UICollectionViewDiffableDataSource<Int, NSManagedObjectID>!
     
     var gridModel = LaunchpadModel.shared.grid
     var editMode: Bool = false {
@@ -32,7 +33,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
         collectionView.collectionViewLayout = createLayout()
         collectionView.delegate = self 
         
-        dataSource = UICollectionViewDiffableDataSource<Int, UUID>(collectionView: collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
+        dataSource = UICollectionViewDiffableDataSource<Int, NSManagedObjectID>(collectionView: collectionView) { [weak self] collectionView, indexPath, itemIdentifier in
             guard let self else { return nil }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchpadGridCell.reuseID, for: indexPath) as! LaunchpadGridCell
             
@@ -63,8 +64,14 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("tooglePad")
         let id = dataSource.itemIdentifier(for: indexPath)!
-        padsAnimator.blink(padID: id)
-        soundsPlayer.play(instrumentNumber: 0)
+        
+        if (editMode) {
+            
+        }
+        else {
+            padsAnimator.blink(padID: id)
+            soundsPlayer.play(instrumentNumber: 0)
+        }
     }
 }
 

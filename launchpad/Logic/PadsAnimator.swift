@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import CoreData
 
 class PadsAnimator {
     
-    private var animations: [UUID: Timer] = [:]
+    private var animations: [NSManagedObjectID: Timer] = [:]
     
-    func blink(padID: UUID, duration: TimeInterval = 0.1) {
+    func blink(padID: NSManagedObjectID, duration: TimeInterval = 0.1) {
 
         let grid = LaunchpadModel.shared.grid
         if (!grid.pad(for: padID).isActive) {
