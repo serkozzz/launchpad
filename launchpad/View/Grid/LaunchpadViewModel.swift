@@ -36,7 +36,7 @@ class LaunchpadViewModel {
             onUpdate?(.collectionUpdated)
         }.store(in: &cancellables)
         
-        gridModel.padChanged.sink { [weak self] id in
+        gridModel.padActivityChanged.sink { [weak self] id in
             guard let self else { return }
             recreateSnapshot()
             snapshot.reloadItems([id])

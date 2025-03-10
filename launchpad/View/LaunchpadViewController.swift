@@ -40,11 +40,7 @@ class LaunchpadViewController: UIViewController {
     
     
     @IBAction func library(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Library", bundle: nil)
-        let vc = storyboard.instantiateInitialViewController { coder in LibraryViewController(coder: coder) }!
-        
+        let vc = LibraryViewController.createFromStoryboard()
         present(vc, animated: true)
-        
-        
     }
 }

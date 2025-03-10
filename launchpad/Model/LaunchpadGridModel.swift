@@ -64,6 +64,13 @@ class LaunchpadGridModel {
         return pads
     }
     
+    private func fetchInstruments() -> [InstrumentDB] {
+        let fetchRequest: NSFetchRequest<InstrumentDB> = InstrumentDB.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        let pads = try! CoreDataStack.shared.managedContext.fetch(fetchRequest)
+        return pads
+    }
+    
     func increaseGrid() {
         guard columns + 1 <= GRID_MAX_COLUMNS, rows + 1 <= GRID_MAX_ROWS else { return }
         columns += 1
@@ -79,7 +86,16 @@ class LaunchpadGridModel {
     func togglePad(_ id: NSManagedObjectID) {
         let index = allPadsIndex(for: id)
         allPads[index].isActive.toggle()
-        padChanged.send(id)
+        padActivityChanged.send(id)
+    }
+    
+    func setInstrument(_ instrumentID: NSManagedObjectID, for padID: NSManagedObjectID) {
+        var instumentDB = fetchInstruments().first(where: {$0.objectID == instrumentID})!
+        var padDB = allPads.first(where: {$0.objectID == padID})!
+        padDB.instrument = instumentDB
+        CoreDataStack.shared.saveContext()
+        
+        padInstrumentChanged.send(padID)
     }
     
     func pad(for id: NSManagedObjectID) -> LaunchpadPad {
@@ -105,7 +121,8 @@ class LaunchpadGridModel {
     
     var columnsChanged = PassthroughSubject<Int, Never>()
     var rowsChanged = PassthroughSubject<Int, Never>()
-    var padChanged = PassthroughSubject<NSManagedObjectID, Never>()
+    var padActivityChanged = PassthroughSubject<NSManagedObjectID, Never>()
+    var padInstrumentChanged = PassthroughSubject<NSManagedObjectID, Never>()
 }
 
 

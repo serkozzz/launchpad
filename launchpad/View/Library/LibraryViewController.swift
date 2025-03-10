@@ -9,13 +9,22 @@ import UIKit
 import CoreData
 import UniformTypeIdentifiers
 
+protocol LibraryViewControllerDelegate: AnyObject {
+    func libraryViewController(_ controller: LibraryViewController, didSelectInstrument id: NSManagedObjectID)
+}
 
 class LibraryViewController: UIViewController {
     
+    weak var delegate: LibraryViewControllerDelegate?
+    
+    static func createFromStoryboard() -> LibraryViewController {
+        let storyboard = UIStoryboard(name: "Library", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController { coder in LibraryViewController(coder: coder) }!
+        return vc
+    }
+    
     private var reuseID = "LibraryViewControllerCell"
-    
     @IBOutlet weak var tableView: UITableView!
-    
     private var viewModel = LibraryViewModel()
     private var dataSource: UITableViewDiffableDataSource<String, NSManagedObjectID>!
 
@@ -23,6 +32,7 @@ class LibraryViewController: UIViewController {
         super.viewDidLoad()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseID)
+        tableView.delegate = self
         
         dataSource = UITableViewDiffableDataSource<String, NSManagedObjectID>(tableView: tableView) { [weak self] tableView, indexPath, objectID in
             guard let self else { return nil }
@@ -50,7 +60,14 @@ class LibraryViewController: UIViewController {
     }
 }
 
-
+extension LibraryViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let id = dataSource.itemIdentifier(for: indexPath)!
+        delegate?.libraryViewController(self, didSelectInstrument: id)
+    }
+    
+}
+    
 extension LibraryViewController: UIDocumentPickerDelegate {
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {

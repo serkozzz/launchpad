@@ -35,11 +35,7 @@ class InstrumentsLibrary : NSObject {
         instrumentDB.imageName = imageFileName
         instrumentDB.audioFileName = audioFileName
 
-        do {
-            try context.save()
-        } catch {
-            print("Failed to save instrument: \(error)")
-        }
+        CoreDataStack.shared.saveContext()
     }
     
     private lazy var fetchedResultsController: NSFetchedResultsController<InstrumentDB> = {

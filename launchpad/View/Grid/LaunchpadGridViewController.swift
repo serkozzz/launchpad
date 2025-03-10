@@ -26,6 +26,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     private var padsAnimator = PadsAnimator()
     private var soundsPlayer = SoundsPlayer()
     private var launchpadViewModel = LaunchpadViewModel()
+    private var editingPad: NSManagedObjectID?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +78,10 @@ extension LaunchpadGridViewController : LaunchpadGridCellDelegate {
         let pad = gridModel.pad(for: id)
         
         if (editMode) {
-            
+            editingPad = id
+            let vc = LibraryViewController.createFromStoryboard()
+            vc.delegate = self
+            present(vc, animated: true)
         }
         else {
             padsAnimator.blink(padID: id)
@@ -86,9 +90,18 @@ extension LaunchpadGridViewController : LaunchpadGridCellDelegate {
             }
         }
     }
-    
-    
 }
+
+extension LaunchpadGridViewController : LibraryViewControllerDelegate {
+    func libraryViewController(_ controller: LibraryViewController, didSelectInstrument id: NSManagedObjectID) {
+        dismiss(animated: true) { [self] in
+            gridModel.setInstrument(id, for: editingPad!)
+        }
+    }
+    
+
+}
+
 
 extension LaunchpadGridViewController {
     func createLayout() -> UICollectionViewCompositionalLayout {
