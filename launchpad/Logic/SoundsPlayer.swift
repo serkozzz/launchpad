@@ -17,7 +17,7 @@ class SoundsPlayer {
     init() {
         configureAudioSession()
         LaunchpadModel.shared.instrumentsLibrary.instruments.forEach {
-            let wavURL = urlForAudio($0.audioFileName)
+            let wavURL = ContentManager.shared.urlForAudio($0.audioFileName)
             samplers[$0.id] = AudioSampler(engine: engine, wavUrl: wavURL)
         }
         startAudioEngine()
@@ -27,11 +27,7 @@ class SoundsPlayer {
         samplers[instument.objectID]!.play()
     }
     
-    private func urlForAudio(_ fileName: String) -> URL {
-        let tempDir = FileManager.default.temporaryDirectory
-        let result = tempDir.appending(component: Globals.AUDIO_STORAGE_ROOT).appending(component: fileName)
-        return result
-    }
+
     
 }
 

@@ -41,4 +41,9 @@ class ContentManager {
         let destination = audioStorageURL.appendingPathComponent(url.lastPathComponent)
         try fileManager.copyItem(at: url, to: destination)
     }
+    
+    func urlForAudio(_ fileName: String) -> URL {
+        let result = documentsDir.appending(component: Globals.AUDIO_STORAGE_ROOT).appending(component: fileName)
+        return result
+    }
 }
