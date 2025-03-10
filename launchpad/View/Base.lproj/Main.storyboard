@@ -63,11 +63,27 @@
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGC-XX-4Yx">
+                                        <rect key="frame" x="0.0" y="0.0" width="77" height="44"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXj-t8-3UG">
+                                                <rect key="frame" x="0.0" y="0.0" width="77" height="44"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Library"/>
+                                                <connections>
+                                                    <action selector="library:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oy1-Yd-7u7"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="B4M-7D-naM" secondAttribute="trailing" id="6xl-0N-qpR"/>
+                                    <constraint firstItem="SGC-XX-4Yx" firstAttribute="top" secondItem="vG7-ll-OO1" secondAttribute="top" id="90d-cr-RQy"/>
                                     <constraint firstItem="B4M-7D-naM" firstAttribute="top" secondItem="vG7-ll-OO1" secondAttribute="top" id="G92-Bz-A5g"/>
+                                    <constraint firstItem="SGC-XX-4Yx" firstAttribute="leading" secondItem="vG7-ll-OO1" secondAttribute="leading" id="KEF-Nm-FqQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="SGC-XX-4Yx" secondAttribute="bottom" id="MaB-v7-lCa"/>
                                     <constraint firstAttribute="bottom" secondItem="B4M-7D-naM" secondAttribute="bottom" id="Mfy-Cb-G5h"/>
                                     <constraint firstAttribute="height" constant="44" id="xZk-mA-L4w"/>
                                 </constraints>
@@ -145,7 +161,7 @@
         <image name="minus" catalog="system" width="128" height="26"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

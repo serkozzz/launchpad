@@ -7,19 +7,17 @@
 
 import Foundation
 
-class ContentLoader {
+class ContentManager {
     
-    static let shared: ContentLoader = ContentLoader()
+    static let shared: ContentManager = ContentManager()
     let fileManager = FileManager.default
+    let documentsDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    lazy var audioStorageURL: URL = documentsDir.appendingPathComponent(Globals.AUDIO_STORAGE_ROOT)
     
-    
-    func loadAudioStorage(dirURL url: URL) throws {
+    func loadAudioStorageIfNeeded(dirURL url: URL) throws {
         
-        let tempDir = fileManager.temporaryDirectory
-        let destinationDir = tempDir.appendingPathComponent(Globals.AUDIO_STORAGE_ROOT)
-        
-        // Удаляем папку tmp/FilesStorage, если она существует
-        if fileManager.fileExists(atPath: destinationDir.path) { try fileManager.removeItem(at: destinationDir) }
+        let destinationDir = audioStorageURL
+        guard !fileManager.fileExists(atPath: destinationDir.path) else { return }
         
         // Создаем новую папку tmp/FilesStorage
         try fileManager.createDirectory(at: destinationDir, withIntermediateDirectories: true, attributes: nil)
@@ -37,5 +35,10 @@ class ContentLoader {
             print(item.lastPathComponent)
             try fileManager.copyItem(at: item, to: destination)
         }
+    }
+    
+    func addAudioFile(url: URL) throws {
+        let destination = audioStorageURL.appendingPathComponent(url.lastPathComponent)
+        try fileManager.copyItem(at: url, to: destination)
     }
 }

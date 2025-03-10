@@ -17,6 +17,10 @@ class LaunchpadModel {
         return instrumentsDB.map { Instrument($0) }
     }
 
+    func instrument(for id: NSManagedObjectID) -> Instrument {
+        Instrument(instrumentsDB.first(where: {id == $0.objectID})!)
+    }
+    
     private func fetchInstruments() -> [InstrumentDB] {
         let fetchRequest: NSFetchRequest<InstrumentDB> = InstrumentDB.fetchRequest()
         let instruments = try! CoreDataStack.shared.managedContext.fetch(fetchRequest)

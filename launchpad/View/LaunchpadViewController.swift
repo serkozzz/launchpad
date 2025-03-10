@@ -36,5 +36,15 @@ class LaunchpadViewController: UIViewController {
         gridVC.editMode = false
         cancelButton.isHidden = true
         editButton.isHidden = false
-    }    
+    }
+    
+    
+    @IBAction func library(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Library", bundle: nil)
+        let vc = storyboard.instantiateInitialViewController { coder in LibraryViewController(coder: coder) }!
+        
+        present(vc, animated: true)
+        
+        
+    }
 }

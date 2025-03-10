@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func prepareAudioStorage() {
         do {
             let url = Bundle.main.url(forResource: Globals.AUDIO_STORAGE_ROOT, withExtension: nil)!
-            try ContentLoader.shared.loadAudioStorage(dirURL: url)
+            try ContentManager.shared.loadAudioStorageIfNeeded(dirURL: url)
         }
         catch { print("ContentLoader.\(#function) Ошибка загрузки audioStorage: \(error)") }
     }
