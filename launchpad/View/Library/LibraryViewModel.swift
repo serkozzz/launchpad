@@ -9,68 +9,39 @@ import UIKit
 import Combine
 
 
-class LibraryViewModel : NSObject {
-    var onUpdate: (() -> Void)?
+class LibraryViewModel {
+    typealias LibrarySnapshot = NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
     
-    private(set) var snapshot: NSDiffableDataSourceSnapshot<String, NSManagedObjectID>!
+    var collectionChanged: (() -> Void)?
+    private(set) var snapshot: LibrarySnapshot!
+    
+    private var instrumentslibrary = LaunchpadModel.shared.instrumentsLibrary
     private var cancellables: Set<AnyCancellable> = []
     
-    override init() {
-        super.init()
-        do {
-            try fetchedResultsController.performFetch()
-        } catch let error as NSError {
-            print("Fetching error: \(error), \(error.userInfo)")
-        }
-    }
-        
-    func addInstrument(name: String, audioFileName: String) {
-        let context = CoreDataStack.shared.managedContext
-
-        
-        let instrument = InstrumentDB(context: context)
-        instrument.name = name
-        //instrument.imageName = imageName
-        instrument.audioFileName = audioFileName
-
-        do {
-            try context.save()
-        } catch {
-            print("Failed to save instrument: \(error)")
-        }
+    init() {
+        instrumentslibrary.collectionChanged.sink { [weak self] snapshot in
+            guard let self = self else { return }
+            self.snapshot = snapshot
+            collectionChanged?()
+        }.store(in: &cancellables)
+        //you need create first snapshot manually, casuse fetchedResultsController doesn't call its delegate on start
+        updateSnapshot()
     }
     
-    func instruments() -> [Instrument] {
-        fetchedResultsController.fetchedObjects!.map { Instrument($0)}
+    func addInstrument(name: String, imageFileName: String?, audioFileName: String) {
+        instrumentslibrary.addInstrument(name: name, imageFileName: imageFileName, audioFileName: audioFileName)
     }
     
     func instrument(for id: NSManagedObjectID) -> Instrument {
-        Instrument(fetchedResultsController.fetchedObjects!.first(where: {id == $0.objectID})!)
+        instrumentslibrary.instrument(for: id)
     }
     
-    lazy var fetchedResultsController: NSFetchedResultsController<InstrumentDB> = {
-        
-        let fetchRequest: NSFetchRequest<InstrumentDB> = InstrumentDB.fetchRequest()
-        
-        //обязательно нужна какая то сортировка иначе креш
-        let nameSort = NSSortDescriptor(key: #keyPath(InstrumentDB.name), ascending: true)
-        fetchRequest.sortDescriptors = [nameSort]
-    
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                  managedObjectContext: CoreDataStack.shared.managedContext,
-                                                                  sectionNameKeyPath: nil,
-                                                                  cacheName: "worldCup")
-        
-        fetchedResultsController.delegate = self
-        return fetchedResultsController
-    }()
-}
-
-
-extension LibraryViewModel : NSFetchedResultsControllerDelegate {
-    func controller(_ controller: NSFetchedResultsController<any NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
-        self.snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
-        onUpdate?()
+    private func updateSnapshot() {
+        var newSnapshot = LibrarySnapshot()
+        newSnapshot.appendSections([""])
+        newSnapshot.appendItems(instrumentslibrary.instruments.map { $0.id })
+        snapshot = newSnapshot
+        collectionChanged?()
     }
-    
 }
+

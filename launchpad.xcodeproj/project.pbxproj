@@ -37,6 +37,7 @@
 		9DB15DD62D793A74009B5D4D /* LaunchpadGridCellContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB15DD52D793A71009B5D4D /* LaunchpadGridCellContentView.swift */; };
 		9DD33E232D7D287500DAF3C4 /* DBGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD33E222D7D287100DAF3C4 /* DBGenerator.swift */; };
 		9DF610F12D7E0845003700AC /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF610F02D7E083D003700AC /* LibraryViewModel.swift */; };
+		9DF610F32D7E7FCE003700AC /* InstrumentsLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF610F22D7E7FC5003700AC /* InstrumentsLibrary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		9DB15DD52D793A71009B5D4D /* LaunchpadGridCellContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadGridCellContentView.swift; sourceTree = "<group>"; };
 		9DD33E222D7D287100DAF3C4 /* DBGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBGenerator.swift; sourceTree = "<group>"; };
 		9DF610F02D7E083D003700AC /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
+		9DF610F22D7E7FC5003700AC /* InstrumentsLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentsLibrary.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +180,7 @@
 		9DB15DB92D77E6CE009B5D4D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9DF610F22D7E7FC5003700AC /* InstrumentsLibrary.swift */,
 				9D77FB752D7DFF8C000256EF /* Instrument.swift */,
 				9D6986A92D7D1AF800F370BE /* LaunchpadPad.swift */,
 				9DB15DBA2D77E6E4009B5D4D /* LaunchpadModel.swift */,
@@ -285,6 +288,7 @@
 				9D0598AA2D7BFEB70022140D /* SoundsPlayer.swift in Sources */,
 				9D6986AF2D7D270D00F370BE /* CoreDataStack.swift in Sources */,
 				9D6986AD2D7D205400F370BE /* database.xcdatamodeld in Sources */,
+				9DF610F32D7E7FCE003700AC /* InstrumentsLibrary.swift in Sources */,
 				9D0598AB2D7BFEB70022140D /* AudioSampler.swift in Sources */,
 				9D0598B12D7BFF990022140D /* Globals.swift in Sources */,
 				9DB15DB42D77E6C7009B5D4D /* SceneDelegate.swift in Sources */,

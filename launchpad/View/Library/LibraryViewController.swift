@@ -32,7 +32,7 @@ class LibraryViewController: UIViewController {
             cell.contentConfiguration = cfg
             return cell
         }
-        viewModel.onUpdate = { [weak self] in self?.applySnapshot() }
+        viewModel.collectionChanged = { [weak self] in self?.applySnapshot() }
         applySnapshot()
     }
     
@@ -61,7 +61,7 @@ extension LibraryViewController: UIDocumentPickerDelegate {
         
         if url.startAccessingSecurityScopedResource() {
             try! ContentManager.shared.addAudioFile(url: url)
-            viewModel.addInstrument(name: url.deletingPathExtension().lastPathComponent, audioFileName: url.lastPathComponent)
+            viewModel.addInstrument(name: url.deletingPathExtension().lastPathComponent, imageFileName: nil, audioFileName: url.lastPathComponent)
             url.stopAccessingSecurityScopedResource()
         }
     
