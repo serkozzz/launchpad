@@ -9,24 +9,21 @@ import UIKit
 import Combine
 
 
-class LibraryViewModel {
+class LibraryViewModel : NSObject {
     var onUpdate: (() -> Void)?
     
-    private(set) var snapshot: NSDiffableDataSourceSnapshot<Int, NSManagedObjectID>!
-    private var instruments = LaunchpadModel.shared.instrumetns
+    private(set) var snapshot: NSDiffableDataSourceSnapshot<String, NSManagedObjectID>!
     private var cancellables: Set<AnyCancellable> = []
     
-    init() {
-        recreateSnapshot()
+    override init() {
+        super.init()
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error as NSError {
+            print("Fetching error: \(error), \(error.userInfo)")
+        }
     }
-    
-    func recreateSnapshot() {
-        snapshot = NSDiffableDataSourceSnapshot<Int, NSManagedObjectID>()
-        snapshot.appendSections([0])
-        snapshot.appendItems(instruments.map { $0.id })
-    }
-    
-    
+        
     func addInstrument(name: String, audioFileName: String) {
         let context = CoreDataStack.shared.managedContext
 
@@ -38,11 +35,42 @@ class LibraryViewModel {
 
         do {
             try context.save()
-            //instruments.append(newInstrument) // Обновляем локальный массив
-            //recreateSnapshot() // Обновляем снапшот
-            //onUpdate?() // Оповещаем UI
         } catch {
             print("Failed to save instrument: \(error)")
         }
     }
+    
+    func instruments() -> [Instrument] {
+        fetchedResultsController.fetchedObjects!.map { Instrument($0)}
+    }
+    
+    func instrument(for id: NSManagedObjectID) -> Instrument {
+        Instrument(fetchedResultsController.fetchedObjects!.first(where: {id == $0.objectID})!)
+    }
+    
+    lazy var fetchedResultsController: NSFetchedResultsController<InstrumentDB> = {
+        
+        let fetchRequest: NSFetchRequest<InstrumentDB> = InstrumentDB.fetchRequest()
+        
+        //обязательно нужна какая то сортировка иначе креш
+        let nameSort = NSSortDescriptor(key: #keyPath(InstrumentDB.name), ascending: true)
+        fetchRequest.sortDescriptors = [nameSort]
+    
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
+                                                                  managedObjectContext: CoreDataStack.shared.managedContext,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: "worldCup")
+        
+        fetchedResultsController.delegate = self
+        return fetchedResultsController
+    }()
+}
+
+
+extension LibraryViewModel : NSFetchedResultsControllerDelegate {
+    func controller(_ controller: NSFetchedResultsController<any NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
+        self.snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
+        onUpdate?()
+    }
+    
 }

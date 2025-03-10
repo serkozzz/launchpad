@@ -17,18 +17,18 @@ class LibraryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     private var viewModel = LibraryViewModel()
-    private var dataSource: UITableViewDiffableDataSource<Int, NSManagedObjectID>!
+    private var dataSource: UITableViewDiffableDataSource<String, NSManagedObjectID>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseID)
         
-        dataSource = UITableViewDiffableDataSource<Int, NSManagedObjectID>(tableView: tableView) { tableView, indexPath, objectID in
-            
+        dataSource = UITableViewDiffableDataSource<String, NSManagedObjectID>(tableView: tableView) { [weak self] tableView, indexPath, objectID in
+            guard let self else { return nil }
             let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseID, for: indexPath)
             var cfg = UIListContentConfiguration.cell()
-            cfg.text = LaunchpadModel.shared.instrument(for: objectID).name
+            cfg.text = self.viewModel.instrument(for: objectID).name
             cell.contentConfiguration = cfg
             return cell
         }
@@ -62,7 +62,6 @@ extension LibraryViewController: UIDocumentPickerDelegate {
         if url.startAccessingSecurityScopedResource() {
             try! ContentManager.shared.addAudioFile(url: url)
             viewModel.addInstrument(name: url.deletingPathExtension().lastPathComponent, audioFileName: url.lastPathComponent)
-            
             url.stopAccessingSecurityScopedResource()
         }
     
