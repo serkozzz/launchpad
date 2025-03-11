@@ -39,6 +39,7 @@ class LibraryViewController: UIViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseID, for: indexPath)
             var cfg = UIListContentConfiguration.cell()
             cfg.text = self.viewModel.instrument(for: objectID).name
+            print(objectID)
             cell.contentConfiguration = cfg
             return cell
         }

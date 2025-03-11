@@ -31,6 +31,7 @@ class InstrumentsLibrary : NSObject {
         let context = CoreDataStack.shared.managedContext
 
         let instrumentDB = InstrumentDB(context: context)
+        try! context.obtainPermanentIDs(for: [instrumentDB])
         instrumentDB.name = name
         instrumentDB.imageName = imageFileName
         instrumentDB.audioFileName = audioFileName
@@ -68,7 +69,8 @@ class InstrumentsLibrary : NSObject {
 
 extension InstrumentsLibrary: NSFetchedResultsControllerDelegate {
     func controller(_ controller: NSFetchedResultsController<any NSFetchRequestResult>, didChangeContentWith snapshot: NSDiffableDataSourceSnapshotReference) {
-        var snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
+        let snapshot = snapshot as NSDiffableDataSourceSnapshot<String, NSManagedObjectID>
+        print(snapshot.itemIdentifiers)
         collectionChanged.send(snapshot)
     }
     

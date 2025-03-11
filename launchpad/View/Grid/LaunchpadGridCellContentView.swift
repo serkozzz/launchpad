@@ -32,8 +32,12 @@ class LaunchpadGridCellContentView : UIView, UIContentView {
         let pad = cfg.pad
         if (cfg.editMode) {
             backgroundColor = .systemGray3
-            instrumentLabel.isHidden = false
-            instrumentLabel.text = pad.number.description
+            instrumentLabel.isHidden = true
+            if let instrumentID = pad.instrumentID {
+                instrumentLabel.isHidden = false
+                var instrument = LaunchpadModel.shared.instrumentsLibrary.instrument(for: instrumentID)
+                instrumentLabel.text = instrument.name
+            }
         }
         else {
             backgroundColor = pad.isActive ? .cyan : .systemGray5

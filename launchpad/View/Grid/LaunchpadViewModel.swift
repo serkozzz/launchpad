@@ -42,6 +42,13 @@ class LaunchpadViewModel {
             snapshot.reloadItems([id])
             onUpdate?(.padUpdated)
         }.store(in: &cancellables)
+        
+        gridModel.padInstrumentChanged.sink { [weak self] id in
+            guard let self else { return }
+            recreateSnapshot()
+            snapshot.reloadItems([id])
+            onUpdate?(.padUpdated)
+        }.store(in: &cancellables)
     }
     
     func recreateSnapshot() {

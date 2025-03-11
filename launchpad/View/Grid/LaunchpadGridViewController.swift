@@ -48,6 +48,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
             
             return cell
         }
+        
         applySnapshot()
         launchpadViewModel.onUpdate = { [weak self] changeType in
             guard let self else { return }
@@ -85,8 +86,8 @@ extension LaunchpadGridViewController : LaunchpadGridCellDelegate {
         }
         else {
             padsAnimator.blink(padID: id)
-            if let instrument = pad.instrument {
-                soundsPlayer.play(instument: instrument)
+            if let instrumentID = pad.instrumentID {
+                soundsPlayer.play(instumentID: instrumentID)
             }
         }
     }

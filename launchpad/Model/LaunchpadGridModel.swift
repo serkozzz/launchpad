@@ -67,8 +67,8 @@ class LaunchpadGridModel {
     private func fetchInstruments() -> [InstrumentDB] {
         let fetchRequest: NSFetchRequest<InstrumentDB> = InstrumentDB.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-        let pads = try! CoreDataStack.shared.managedContext.fetch(fetchRequest)
-        return pads
+        let instruments = try! CoreDataStack.shared.managedContext.fetch(fetchRequest)
+        return instruments
     }
     
     func increaseGrid() {
@@ -90,8 +90,8 @@ class LaunchpadGridModel {
     }
     
     func setInstrument(_ instrumentID: NSManagedObjectID, for padID: NSManagedObjectID) {
-        var instumentDB = fetchInstruments().first(where: {$0.objectID == instrumentID})!
-        var padDB = allPads.first(where: {$0.objectID == padID})!
+        let instumentDB = fetchInstruments().first(where: {$0.objectID == instrumentID})!
+        let padDB = allPads.first(where: {$0.objectID == padID})!
         padDB.instrument = instumentDB
         CoreDataStack.shared.saveContext()
         
@@ -99,7 +99,7 @@ class LaunchpadGridModel {
     }
     
     func pad(for id: NSManagedObjectID) -> LaunchpadPad {
-        var padDB = allPads.first(where: { $0.objectID == id})!
+        let padDB = allPads.first(where: { $0.objectID == id})!
         return LaunchpadPad(padDB)
     }
     
