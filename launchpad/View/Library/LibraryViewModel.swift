@@ -32,6 +32,10 @@ class LibraryViewModel {
         instrumentslibrary.addInstrument(name: name, imageFileName: imageFileName, audioFileName: audioFileName)
     }
     
+    func removeInstrument(with id: NSManagedObjectID) {
+        instrumentslibrary.removeInstrument(withID: id)
+    }
+    
     func instrument(for id: NSManagedObjectID) -> Instrument {
         instrumentslibrary.instrument(for: id)
     }

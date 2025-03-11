@@ -15,6 +15,12 @@ protocol LibraryViewControllerDelegate: AnyObject {
 
 class LibraryViewController: UIViewController {
     
+    @IBOutlet weak var plusButton: UIButton!
+    
+    @IBOutlet weak var editButton: UIButton!
+    
+    @IBOutlet weak var cancelButton: UIButton!
+    
     weak var delegate: LibraryViewControllerDelegate?
     
     static func createFromStoryboard() -> LibraryViewController {
@@ -26,15 +32,15 @@ class LibraryViewController: UIViewController {
     private var reuseID = "LibraryViewControllerCell"
     @IBOutlet weak var tableView: UITableView!
     private var viewModel = LibraryViewModel()
-    private var dataSource: UITableViewDiffableDataSource<String, NSManagedObjectID>!
+    private var dataSource: LibraryTableViewDiffableDataSource!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseID)
         tableView.delegate = self
-        
-        dataSource = UITableViewDiffableDataSource<String, NSManagedObjectID>(tableView: tableView) { [weak self] tableView, indexPath, objectID in
+
+        dataSource = LibraryTableViewDiffableDataSource(tableView: tableView) { [weak self] tableView, indexPath, objectID in
             guard let self else { return nil }
             let cell = tableView.dequeueReusableCell(withIdentifier: self.reuseID, for: indexPath)
             var cfg = UIListContentConfiguration.cell()
@@ -43,6 +49,7 @@ class LibraryViewController: UIViewController {
             cell.contentConfiguration = cfg
             return cell
         }
+        dataSource.viewModel = viewModel
         viewModel.collectionChanged = { [weak self] in self?.applySnapshot() }
         applySnapshot()
     }
@@ -59,6 +66,26 @@ class LibraryViewController: UIViewController {
         documentPicker.allowsMultipleSelection = false
         present(documentPicker, animated: true, completion: nil)
     }
+    
+    @IBAction func edit(_ sender: Any) {
+        editButton.isHidden = true
+        plusButton.isHidden = true
+        cancelButton.isHidden = false
+        tableView.isEditing  = true
+    }
+    
+    @IBAction func cancel(_ sender: Any) {
+        editButton.isHidden = false
+        plusButton.isHidden = false
+        cancelButton.isHidden = true
+        tableView.isEditing  = false
+        
+    }
+    
+    @IBAction func close(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
 }
 
 extension LibraryViewController: UITableViewDelegate {
@@ -66,7 +93,6 @@ extension LibraryViewController: UITableViewDelegate {
         let id = dataSource.itemIdentifier(for: indexPath)!
         delegate?.libraryViewController(self, didSelectInstrument: id)
     }
-    
 }
     
 extension LibraryViewController: UIDocumentPickerDelegate {
@@ -90,3 +116,17 @@ extension LibraryViewController: UIDocumentPickerDelegate {
     }
 }
 
+
+
+
+
+
+class LibraryTableViewDiffableDataSource: UITableViewDiffableDataSource<String, NSManagedObjectID> {
+   
+    weak var viewModel: LibraryViewModel?
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        guard editingStyle == .delete else { return }
+        let id = self.itemIdentifier(for: indexPath)!
+        viewModel?.removeInstrument(with: id)
+    }
+}

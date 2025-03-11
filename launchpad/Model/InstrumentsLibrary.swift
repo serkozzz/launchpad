@@ -39,6 +39,15 @@ class InstrumentsLibrary : NSObject {
         CoreDataStack.shared.saveContext()
     }
     
+    func removeInstrument(withID id: NSManagedObjectID) {
+        let context = CoreDataStack.shared.managedContext
+    
+        if let instrumentDB = try? context.existingObject(with: id) as? InstrumentDB {
+            context.delete(instrumentDB)
+            CoreDataStack.shared.saveContext()
+        }
+    }
+    
     private lazy var fetchedResultsController: NSFetchedResultsController<InstrumentDB> = {
         
         let fetchRequest: NSFetchRequest<InstrumentDB> = InstrumentDB.fetchRequest()
