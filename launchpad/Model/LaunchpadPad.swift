@@ -16,6 +16,6 @@ struct LaunchpadPad {
     init (_ padDB: LaunchpadPadDB) {
         isActive = padDB.isActive
         id = padDB.objectID
-        instrumentID = padDB.instrument?.objectID
+        instrumentID = padDB.instrumentId?.toManagedObjectID(context: CoreDataStack.shared.managedContext)
     }
 }

@@ -90,9 +90,8 @@ class LaunchpadGridModel {
     }
     
     func setInstrument(_ instrumentID: NSManagedObjectID, for padID: NSManagedObjectID) {
-        let instumentDB = fetchInstruments().first(where: {$0.objectID == instrumentID})!
         let padDB = allPads.first(where: {$0.objectID == padID})!
-        padDB.instrument = instumentDB
+        padDB.instrumentId = instrumentID.toString()
         CoreDataStack.shared.saveContext()
         
         padInstrumentChanged.send(padID)

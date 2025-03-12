@@ -38,6 +38,7 @@
 		9DD33E232D7D287500DAF3C4 /* DBGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD33E222D7D287100DAF3C4 /* DBGenerator.swift */; };
 		9DF610F12D7E0845003700AC /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF610F02D7E083D003700AC /* LibraryViewModel.swift */; };
 		9DF610F32D7E7FCE003700AC /* InstrumentsLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF610F22D7E7FC5003700AC /* InstrumentsLibrary.swift */; };
+		9DF6111C2D810B9C003700AC /* CoreDataUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF6111B2D810B95003700AC /* CoreDataUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		9DD33E222D7D287100DAF3C4 /* DBGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBGenerator.swift; sourceTree = "<group>"; };
 		9DF610F02D7E083D003700AC /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
 		9DF610F22D7E7FC5003700AC /* InstrumentsLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentsLibrary.swift; sourceTree = "<group>"; };
+		9DF6111B2D810B95003700AC /* CoreDataUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				9D0598AF2D7BFF990022140D /* Globals.swift */,
+				9DF6111B2D810B95003700AC /* CoreDataUtils.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 				9D6986AF2D7D270D00F370BE /* CoreDataStack.swift in Sources */,
 				9D6986AD2D7D205400F370BE /* database.xcdatamodeld in Sources */,
 				9DF610F32D7E7FCE003700AC /* InstrumentsLibrary.swift in Sources */,
+				9DF6111C2D810B9C003700AC /* CoreDataUtils.swift in Sources */,
 				9D0598AB2D7BFEB70022140D /* AudioSampler.swift in Sources */,
 				9D0598B12D7BFF990022140D /* Globals.swift in Sources */,
 				9DB15DB42D77E6C7009B5D4D /* SceneDelegate.swift in Sources */,

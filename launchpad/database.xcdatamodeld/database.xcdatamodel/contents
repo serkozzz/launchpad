@@ -6,7 +6,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <entity name="LaunchpadPadDB" representedClassName="LaunchpadPadDB" syncable="YES" codeGenerationType="category">
+        <attribute name="instrumentId" optional="YES" attributeType="String"/>
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="instrument" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="InstrumentDB"/>
     </entity>
 </model>

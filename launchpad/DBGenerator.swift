@@ -35,10 +35,10 @@ class DBGenerator {
             pad.order = Int16($0)
             pads.append(pad)
         }
-        pads.first(where: { $0.order == 0})!.instrument = hatOpened
-        pads.first(where: { $0.order == 1})!.instrument = snare
-        pads.first(where: { $0.order == GRID_MAX_COLUMNS})!.instrument = hat
-        pads.first(where: { $0.order == GRID_MAX_COLUMNS + 1})!.instrument = kick
+        pads.first(where: { $0.order == 0})!.instrumentId = hatOpened.objectID.toString()
+        pads.first(where: { $0.order == 1})!.instrumentId = snare.objectID.toString()
+        pads.first(where: { $0.order == GRID_MAX_COLUMNS})!.instrumentId = hat.objectID.toString()
+        pads.first(where: { $0.order == GRID_MAX_COLUMNS + 1})!.instrumentId = kick.objectID.toString()
 
         do {
             try context.save()
@@ -51,6 +51,7 @@ class DBGenerator {
     private func createInstrument(name: String, imageName: String, audioFileName: String) -> InstrumentDB {
         let context = CoreDataStack.shared.managedContext
         let instrument = InstrumentDB(context: context)
+        try! context.obtainPermanentIDs(for: [instrument])
         instrument.name = name
         instrument.imageName = imageName
         instrument.audioFileName = audioFileName

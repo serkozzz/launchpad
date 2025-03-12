@@ -12,5 +12,4 @@ import CoreData
 @objc(LaunchpadPadDB)
 public class LaunchpadPadDB: NSManagedObject {
     var isActive: Bool = false
-    var number: Int = 0
 }
