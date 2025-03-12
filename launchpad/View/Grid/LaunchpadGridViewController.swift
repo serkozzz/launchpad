@@ -96,17 +96,9 @@ extension LaunchpadGridViewController : LaunchpadGridCellDelegate {
 extension LaunchpadGridViewController : LibraryViewControllerDelegate {
     func libraryViewController(_ controller: LibraryViewController, didSelectInstrument id: NSManagedObjectID) {
         dismiss(animated: true) { [self] in
-            gridModel.setInstrument(id, for: editingPad!)
+            launchpadViewModel.setInstrument(id, for: editingPad!)
         }
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                guard let id = dataSource.itemIdentifier(for: indexPath) else { return }
-
-            }
-        }
-
 }
 
 

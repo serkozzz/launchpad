@@ -58,4 +58,8 @@ class LaunchpadViewModel {
 
     }
     
+    func setInstrument(_ instrumentID: NSManagedObjectID, for padID: NSManagedObjectID) {
+        gridModel.setInstrument(instrumentID, for: padID)
+    }
+    
 }
