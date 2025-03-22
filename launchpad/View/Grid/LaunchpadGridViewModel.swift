@@ -9,7 +9,7 @@ import UIKit
 import Combine
 import CoreData
 
-class LaunchpadViewModel {
+class LaunchpadGridViewModel {
     enum LaunchpadChange {
         case collectionUpdated
         case padUpdated 
@@ -62,4 +62,15 @@ class LaunchpadViewModel {
         gridModel.setInstrument(instrumentID, for: padID)
     }
     
+    func pad(for id: NSManagedObjectID) -> LaunchpadPad {
+        gridModel.pad(for: id)
+    }
+    
+    var columns: Int {
+        gridModel.columns
+    }
+    
+    var rows: Int {
+        gridModel.rows
+    }
 }

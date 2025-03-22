@@ -15,7 +15,6 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     
     var dataSource: UICollectionViewDiffableDataSource<Int, NSManagedObjectID>!
     
-    var gridModel = LaunchpadModel.shared.grid
     var editMode: Bool = false {
         didSet {
             reloadAllItems()
@@ -25,7 +24,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     private var cancellables: Set<AnyCancellable> = []
     private var padsAnimator = PadsAnimator()
     private var soundsPlayer = SoundsPlayer()
-    private var launchpadViewModel = LaunchpadViewModel()
+    private var gridViewModel = LaunchpadGridViewModel()
     private var editingPad: NSManagedObjectID?
     
     override func viewDidLoad() {
@@ -40,7 +39,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
             guard let self else { return nil }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchpadGridCell.reuseID, for: indexPath) as! LaunchpadGridCell
             
-            let pad = gridModel.pad(for: itemIdentifier)
+            let pad = gridViewModel.pad(for: itemIdentifier)
             cell.pad = pad
             cell.delegate = self
             let cfg = LaunchpadGridCellContentConfiguration(pad: pad, editMode: editMode)
@@ -50,7 +49,7 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
         }
         
         applySnapshot()
-        launchpadViewModel.onUpdate = { [weak self] changeType in
+        gridViewModel.onUpdate = { [weak self] changeType in
             guard let self else { return }
             let animating = changeType == .collectionUpdated
             applySnapshot(animating: animating)
@@ -58,11 +57,11 @@ class LaunchpadGridViewController: UIViewController, UICollectionViewDelegate {
     }
 
     func applySnapshot(animating: Bool = true) {
-        dataSource.apply(launchpadViewModel.snapshot, animatingDifferences: animating)
+        dataSource.apply(gridViewModel.snapshot, animatingDifferences: animating)
     }
     
     func reloadAllItems() {
-        var snapshot = launchpadViewModel.snapshot
+        var snapshot = gridViewModel.snapshot
         snapshot.reloadItems(snapshot.itemIdentifiers)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
@@ -76,7 +75,7 @@ extension LaunchpadGridViewController : LaunchpadGridCellDelegate {
         
         print("tooglePad")
         let id = cell.pad.id
-        let pad = gridModel.pad(for: id)
+        let pad = gridViewModel.pad(for: id)
         
         if (editMode) {
             editingPad = id
@@ -96,7 +95,7 @@ extension LaunchpadGridViewController : LaunchpadGridCellDelegate {
 extension LaunchpadGridViewController : LibraryViewControllerDelegate {
     func libraryViewController(_ controller: LibraryViewController, didSelectInstrument id: NSManagedObjectID) {
         dismiss(animated: true) { [self] in
-            launchpadViewModel.setInstrument(id, for: editingPad!)
+            gridViewModel.setInstrument(id, for: editingPad!)
         }
     }
 }
@@ -107,8 +106,8 @@ extension LaunchpadGridViewController {
         UICollectionViewCompositionalLayout () { [self] sectionIndex, environment in
             //guard let self = self else { return nil }
             
-            let itemFractWidth = 1.0 / CGFloat(gridModel.columns)
-            let groupFractHeight =  1.0 / CGFloat(gridModel.rows)
+            let itemFractWidth = 1.0 / CGFloat(gridViewModel.columns)
+            let groupFractHeight =  1.0 / CGFloat(gridViewModel.rows)
             
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(itemFractWidth), heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
